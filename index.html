@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Raylla Studio — Transformo marcas em conteúdos que vendem. Marketing e Redes Sociais, Rio de Janeiro."/>
+<title>Raylla Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+<style>
+/* ===================================================
+   RAYLLA STUDIO — CSS
+   Para mudar cores edite as variáveis em :root
+   =================================================== */
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root {
+  --lilac:      #9b7fc9;
+  --lilac-soft: #c4a8e8;
+  --lilac-bg:   #f0e8fa;
+  --cream:      #faf9f6;
+  --off:        #f2f0ec;
+  --border:     #e4dfd6;
+  --mid:        #b8b0a4;
+  --ink:        #1c1a18;
+  --muted:      #8a8278;
+  --card:       #ffffff;
+  --nav-bg:     rgba(250,249,246,0.92);
+  --shadow:     0 2px 12px rgba(0,0,0,0.06);
+  --shadow-lg:  0 12px 40px rgba(0,0,0,0.10);
+  --r:          14px;
+  --display:    'Cormorant Garamond', Georgia, serif;
+  --body:       'DM Sans', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  --cream:    #131210;
+  --off:      #1a1814;
+  --border:   #2a2720;
+  --mid:      #4a4540;
+  --ink:      #f0ede8;
+  --muted:    #8a8278;
+  --card:     #1e1c18;
+  --nav-bg:   rgba(19,18,16,0.94);
+  --lilac-bg: #1a1428;
+  --shadow:   0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg:0 12px 40px rgba(0,0,0,0.4);
+}
+
+html{scroll-behavior:smooth}
+
+body {
+  font-family: var(--body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background .3s, color .3s;
+}
+
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{cursor:pointer;font-family:var(--body);border:none;background:none}
+
+/* ── NAV ── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  height: 64px;
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  transition: background .3s;
+}
+
+.nav-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  font-weight: 400;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color .2s;
+}
+
+.nav-links a:hover { color: var(--lilac) }
+
+.nav-right { display:flex; align-items:center; gap:14px }
+
+.nav-ig {
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  border: 1px solid var(--lilac);
+  padding: 5px 14px;
+  border-radius: 100px;
+  transition: all .2s;
+}
+
+.nav-ig:hover { background: var(--lilac); color: #fff }
+
+.theme-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+}
+
+.theme-btn:hover { background: var(--off); color: var(--ink) }
+
+.ham {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+
+.ham span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all .2s;
+}
+
+/* Mobile menu */
+.mob-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--cream);
+  z-index: 200;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+.mob-menu.open { display: flex }
+
+.mob-menu a {
+  font-family: var(--display);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--ink);
+  transition: color .2s;
+}
+
+.mob-menu a:hover { color: var(--lilac) }
+
+.mob-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 1.3rem;
+  color: var(--muted);
+}
+
+@media(max-width:768px) {
+  .nav-links,.nav-ig { display:none }
+  .ham { display:flex }
+}
+
+/* ── LAYOUT ── */
+.wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── SECTIONS (single-page nav) ── */
+section { scroll-margin-top: 72px }
+
+/* ── HERO ── */
+.hero {
+  padding: 56px 0 40px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 300;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  margin-bottom: 6px;
+}
+
+.hero p {
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── FILTERS ── */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.filters::-webkit-scrollbar { display:none }
+
+.filter-btn {
+  flex-shrink: 0;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 8px 20px;
+  border-radius: 100px;
+  transition: all .2s;
+  background: var(--card);
+}
+
+.filter-btn:hover { border-color: var(--lilac-soft); color: var(--lilac) }
+.filter-btn.active { background: var(--lilac); border-color: var(--lilac); color: #fff }
+
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+@media(max-width:900px) { .grid { grid-template-columns:repeat(2,1fr) } }
+@media(max-width:560px) { .grid { grid-template-columns:1fr; gap:18px } }
+
+/* ── CARD ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform .22s, box-shadow .22s;
+  animation: fadeUp .4s ease both;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px) }
+  to   { opacity:1; transform:translateY(0) }
+}
+
+.card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg) }
+
+.card-img {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--off);
+}
+
+.card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .5s ease;
+}
+
+.card:hover .card-img img { transform: scale(1.05) }
+
+.card-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: rgba(0,0,0,.52);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: .6rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.play-overlay {
+  position: absolute; inset: 0;
+  display: flex; align-items:center; justify-content:center;
+  background: rgba(0,0,0,.15);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.card:hover .play-overlay { opacity: 1 }
+
+.play-btn {
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.88);
+  display: flex; align-items:center; justify-content:center;
+  font-size: 1.1rem; color: var(--ink);
+}
+
+.card-body { padding: 20px; flex:1; display:flex; flex-direction:column }
+
+.card-client {
+  font-size: .63rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  margin-bottom: 7px;
+}
+
+.card-title {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 8px;
+  transition: color .2s;
+}
+
+.card:hover .card-title { color: var(--lilac) }
+
+.card-desc {
+  font-size: .8rem;
+  color: var(--muted);
+  line-height: 1.55;
+  flex: 1;
+  margin-bottom: 14px;
+}
+
+.tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:12px }
+
+.tag {
+  font-size: .64rem;
+  font-weight: 500;
+  color: var(--lilac);
+  background: var(--lilac-bg);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.card-date { font-size:.66rem; color:var(--mid) }
+
+/* ── EMPTY STATE ── */
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 56px 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+/* ── MODAL ── */
+.modal-bg {
+  display: none;
+  position: fixed; inset:0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(6px);
+  z-index: 300;
+  align-items:center; justify-content:center;
+  padding: 16px;
+}
+
+.modal-bg.open { display:flex; animation: fadeIn .2s ease }
+
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.modal {
+  background: var(--card);
+  border-radius: 18px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp .28s ease;
+}
+
+@keyframes slideUp {
+  from{transform:translateY(24px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.modal-media {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--ink);
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+}
+
+.modal-media img { width:100%; height:100%; object-fit:cover }
+
+.modal-media iframe { width:100%; height:100%; border:none }
+
+.modal-x {
+  position: absolute; top:14px; right:14px;
+  width: 34px; height:34px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.45);
+  color: #fff;
+  font-size: 1rem;
+  display:flex; align-items:center; justify-content:center;
+  z-index: 2;
+  transition: background .2s;
+}
+
+.modal-x:hover { background:rgba(0,0,0,.7) }
+
+.modal-body { padding: 32px 36px 36px }
+
+.modal-meta { display:flex; gap:16px; margin-bottom:14px }
+.modal-client { font-size:.7rem; font-weight:500; letter-spacing:.1em; text-transform:uppercase; color:var(--lilac) }
+.modal-date   { font-size:.7rem; color:var(--muted) }
+
+.modal-title {
+  font-family: var(--display);
+  font-size: clamp(1.4rem,3vw,2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+
+.modal-tags { margin-bottom:20px }
+
+.modal-content {
+  font-size: .92rem;
+  line-height: 1.85;
+  color: var(--muted);
+  white-space: pre-line;
+}
+
+@media(max-width:560px) { .modal-body{padding:24px 20px 28px} }
+
+/* ── PAGE SECTIONS (sobre, serviços, contato) ── */
+.section-header {
+  padding: 72px 0 48px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 52px;
+}
+
+.section-label {
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--lilac);
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(2rem,4vw,3.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+}
+
+.section-sub {
+  margin-top: 14px;
+  font-size: .9rem;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.7;
+}
+
+/* ── SOBRE ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 56px;
+  align-items: start;
+  padding-bottom: 80px;
+}
+
+.about-img {
+  aspect-ratio: 3/4;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--off);
+}
+
+.about-img img { width:100%; height:100%; object-fit:cover }
+
+.about-text h3 {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 18px;
+  line-height: 1.2;
+}
+
+.about-text p {
+  font-size: .88rem;
+  line-height: 1.85;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.about-details {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-detail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .82rem;
+  color: var(--muted);
+}
+
+@media(max-width:760px) {
+  .about-grid { grid-template-columns:1fr; gap:32px }
+  .about-img  { aspect-ratio:4/3 }
+}
+
+/* ── SERVIÇOS ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 22px;
+  padding-bottom: 80px;
+}
+
+.serv-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 32px 28px;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.serv-card:hover { border-color:var(--lilac-soft); box-shadow:var(--shadow-lg) }
+
+.serv-icon { font-size:1.6rem; margin-bottom:14px }
+
+.serv-title {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+
+.serv-desc {
+  font-size: .83rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+
+.serv-list { list-style:none; display:flex; flex-direction:column; gap:7px }
+
+.serv-list li {
+  font-size: .78rem;
+  color: var(--muted);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.serv-list li::before { content:'—'; color:var(--lilac); flex-shrink:0; margin-top:1px }
+
+@media(max-width:660px) { .services-grid{grid-template-columns:1fr} }
+
+/* ── FEEDBACK ── */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 20px;
+  padding-bottom: 80px;
+}
+
+.test-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 26px;
+}
+
+.stars { color:var(--lilac-soft); font-size:.85rem; margin-bottom:12px; letter-spacing:2px }
+
+.test-text {
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+
+.test-name { font-size:.8rem; font-weight:500; color:var(--ink) }
+.test-role  { font-size:.72rem; color:var(--muted); margin-top:2px }
+
+@media(max-width:600px) { .testimonials-grid{grid-template-columns:1fr} }
+
+/* ── FAQ ── */
+.faq-wrap {
+  max-width: 700px;
+  padding-bottom: 80px;
+}
+
+.faq-item { border-bottom: 1px solid var(--border) }
+
+.faq-q {
+  width:100%;
+  text-align:left;
+  padding: 18px 0;
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: color .2s;
+}
+
+.faq-q:hover { color:var(--lilac) }
+
+.faq-arrow {
+  font-size: .7rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  transition: transform .2s;
+}
+
+.faq-item.open .faq-arrow { transform:rotate(180deg) }
+
+.faq-a {
+  font-size: .84rem;
+  color: var(--muted);
+  line-height: 1.8;
+  padding-bottom: 18px;
+  display: none;
+}
+
+.faq-item.open .faq-a { display:block }
+
+/* ── CONTATO ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 56px;
+  padding-bottom: 80px;
+}
+
+.contact-info h3 {
+  font-family: var(--display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 14px;
+}
+
+.contact-info p { font-size:.84rem; color:var(--muted); line-height:1.8; margin-bottom:28px }
+
+.contact-links { display:flex; flex-direction:column; gap:12px }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .82rem;
+  color: var(--muted);
+  transition: color .2s;
+}
+
+.contact-link:hover { color:var(--lilac) }
+
+.contact-icon {
+  width:34px; height:34px;
+  background:var(--off);
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:.95rem;
+}
+
+/* Form */
+.form { display:flex; flex-direction:column; gap:16px }
+
+.form-group { display:flex; flex-direction:column; gap:5px }
+
+.form-label {
+  font-size: .68rem;
+  font-weight: 500;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.form-input, .form-textarea {
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: var(--body);
+  font-size: .88rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .2s;
+  width: 100%;
+}
+
+.form-input:focus, .form-textarea:focus { border-color:var(--lilac) }
+
+.form-textarea { min-height:120px; resize:vertical }
+
+.form-btn {
+  background: var(--lilac);
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: 100px;
+  font-size: .78rem;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  align-self: flex-start;
+  transition: background .2s;
+}
+
+.form-btn:hover { background:var(--lilac-soft) }
+.form-btn:disabled { opacity:.6 }
+
+.form-success {
+  text-align:center; padding:32px;
+  font-family:var(--display);
+  font-size:1.4rem;
+  color:var(--lilac);
+}
+
+.form-warn {
+  font-size:.7rem;
+  color:var(--mid);
+  margin-top:4px;
+}
+
+@media(max-width:720px) {
+  .contact-grid { grid-template-columns:1fr; gap:36px }
+}
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  display:flex; align-items:center; justify-content:space-between;
+  max-width:1160px;
+  margin:0 auto;
+}
+
+.footer-brand { font-family:var(--display); font-size:.9rem; color:var(--muted); letter-spacing:.08em }
+.footer-copy  { font-size:.68rem; color:var(--mid) }
+
+@media(max-width:480px) {
+  .footer { flex-direction:column; gap:8px; text-align:center }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+  NAV
+============================================================ -->
+<nav class="nav">
+  <div class="nav-wrap">
+    <a href="#home" class="logo">Raylla Studio</a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#feedback">Feedback</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" onclick="toggleTheme()" title="Modo escuro">◐</button>
+      <!-- ✏️ Troque o link do Instagram aqui -->
+      <a href="https://instagram.com/rayllafotos" target="_blank" class="nav-ig">@rayllafotos</a>
+      <button class="ham" onclick="openMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mob-menu" id="mob-menu">
+  <button class="mob-close" onclick="closeMenu()">✕</button>
+  <a href="#home"     onclick="closeMenu()">Home</a>
+  <a href="#sobre"    onclick="closeMenu()">Sobre</a>
+  <a href="#servicos" onclick="closeMenu()">Serviços</a>
+  <a href="#feedback" onclick="closeMenu()">Feedback</a>
+  <a href="#faq"      onclick="closeMenu()">FAQ</a>
+  <a href="#contato"  onclick="closeMenu()">Contato</a>
+</div>
+
+
+<!-- ============================================================
+  HOME / FEED
+============================================================ -->
+<section id="home">
+<div class="wrap">
+
+  <header class="hero">
+    <!-- ✏️ Troque seu nome e tagline aqui -->
+    <h1>Raylla Studio</h1>
+    <p>Transformo marcas em conteúdos que vendem</p>
+  </header>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">✦ Tudo</button>
+    <button class="filter-btn" data-filter="video">▶ Vídeos</button>
+    <button class="filter-btn" data-filter="article">✎ Artigos</button>
+  </div>
+
+  <!-- Grid de posts -->
+  <div class="grid" id="feed-grid"></div>
+
+</div>
+</section>
+
+
+<!-- ============================================================
+  SOBRE
+============================================================ -->
+<section id="sobre">
+<div class="wrap">
+  <header class="section-header">
+    <p class="section-label">Sobre</p>
+    <!-- ✏️ Seu nome -->
+    <h2 class="section-title">Raylla Araujo</h2>
+    <p class="section-sub">Criadora de conteúdo e gestora de redes sociais baseada no Rio de Janeiro.</p>
+  </header>
+
+  <div class="about-grid">
+    <!-- ✏️ Troque o link pela URL da sua foto -->
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=700&q=80" alt="Raylla Araujo"/>
+    </div>
+
+    <div class="about-text">
+      <!-- ✏️ Edite seu texto aqui -->
+      <h3>Marketing que conecta.<br/>Conteúdo que converte.</h3>
+      <p>
+        Sou Raylla, gestora de redes sociais e editora de vídeo com foco em marcas pessoais
+        e pequenos negócios. Trabalho com o poder do audiovisual para transformar a presença
+        digital de quem tem algo genuíno a dizer.
+      </p>
+      <p>
+        Minha experiência inclui produção completa para canais de YouTube, criação de estratégias
+        de conteúdo para Instagram, edição de vídeos curtos e longos, e gestão de projetos
+        criativos do conceito ao upload.
+      </p>
+      <p>
+        Acredito que um bom conteúdo não grita — ele ressoa. Por isso, cada projeto começa
+        com escuta: entender a marca, o público e o que realmente precisa ser comunicado.
+      </p>
+
+      <div class="about-details">
+        <!-- ✏️ Edite suas informações -->
+        <div class="about-detail"><span>📍</span><span>Rio de Janeiro, RJ</span></div>
+        <div class="about-detail"><span>✦</span><span>Marketing · Redes Sociais · Edição de Vídeo</span></div>
+        <div class="about-detail"><span>◎</span><span>Disponível para novos projetos</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ============================================================
+  SERVIÇOS
+============================================================ -->
+<section id="servicos">
+<div class="wrap">
+  <header class="section-header">
+    <p class="section-label">Serviços</p>
+    <h2 class="section-title">O que posso<br/>fazer por você</h2>
+    <p class="section-sub">Trabalho com marcas pessoais e pequenos negócios que querem crescer com conteúdo autêntico e estratégico.</p>
+  </header>
+
+  <!-- ✏️ Edite os serviços aqui -->
+  <div class="services-grid">
+    <div class="serv-card">
+      <div class="serv-icon">▶</div>
+      <h3 class="serv-title">Produção de Vídeo</h3>
+      <p class="serv-desc">Edição profissional de vídeos curtos e longos com identidade visual consistente e storytelling que retém atenção.</p>
+      <ul class="serv-list">
+        <li>Reels e TikToks de até 60 segundos</li>
+        <li>Vídeos para YouTube (longos e shorts)</li>
+        <li>Edição com legendas e motion</li>
+        <li>Thumbnail e arte de capa</li>
+        <li>Entrega otimizada por plataforma</li>
+      </ul>
+    </div>
+
+    <div class="serv-card">
+      <div class="serv-icon">◎</div>
+      <h3 class="serv-title">Gestão de Redes Sociais</h3>
+      <p class="serv-desc">Estratégia, criação e publicação de conteúdo para Instagram e YouTube. Consistência que constrói marca.</p>
+      <ul class="serv-list">
+        <li>Planejamento editorial mensal</li>
+        <li>Criação de conteúdo em vídeo e imagem</li>
+        <li>Legendas otimizadas para engajamento</li>
+        <li>Agendamento e publicação</li>
+        <li>Relatório mensal de resultados</li>
+      </ul>
+    </div>
+
+    <div class="serv-card">
+      <div class="serv-icon">✦</div>
+      <h3 class="serv-title">Estratégia de Conteúdo</h3>
+      <p class="serv-desc">Para marcas que precisam de direção antes de execução. Construímos juntos o posicionamento e a linha editorial.</p>
+      <ul class="serv-list">
+        <li>Diagnóstico de perfil atual</li>
+        <li>Definição de público e tom de voz</li>
+        <li>Calendário editorial estruturado</li>
+        <li>Orientação sobre formatos e tendências</li>
+        <li>Documento estratégico completo</li>
+      </ul>
+    </div>
+
+    <div class="serv-card">
+      <div class="serv-icon">✎</div>
+      <h3 class="serv-title">SEO para YouTube</h3>
+      <p class="serv-desc">Otimização de títulos, descrições, tags e thumbnails para aumentar o alcance orgânico dos seus vídeos.</p>
+      <ul class="serv-list">
+        <li>Pesquisa de palavras-chave</li>
+        <li>Otimização de metadados</li>
+        <li>Estrutura de capítulos e cards</li>
+        <li>Análise de concorrentes</li>
+        <li>Consultoria de crescimento de canal</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ============================================================
+  FEEDBACK
+============================================================ -->
+<section id="feedback">
+<div class="wrap">
+  <header class="section-header">
+    <p class="section-label">Feedback</p>
+    <h2 class="section-title">O que dizem<br/>os clientes</h2>
+    <p class="section-sub">Resultados reais de pessoas reais. Cada projeto é uma parceria de confiança.</p>
+  </header>
+
+  <!-- ✏️ Edite os depoimentos aqui -->
+  <div class="testimonials-grid">
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p class="test-text">"A Raylla entendeu desde o primeiro episódio o que precisávamos comunicar. O canal cresceu com consistência e qualidade real."</p>
+      <p class="test-name">Sandra Luz</p>
+      <p class="test-role">Host e Fundadora · FILOSOFÉ</p>
+    </div>
+    <div class="test-card">
+      <div class="stars">★★★★★</div>
+      <p class="test-text">"O conteúdo que a Raylla criou para nós capturou exatamente a essência do nosso retiro. Os hóspedes chegam já sabendo o que esperar."</p>
+      <p class="test-name">Equipe Chalé Paz</p>
+      <p class="test-role">Turismo Consciente · Chalé Paz</p>
+    </div>
+    <!-- ✏️ Adicione mais depoimentos copiando o bloco acima -->
+  </div>
+</div>
+</section>
+
+
+<!-- ============================================================
+  FAQ
+============================================================ -->
+<section id="faq">
+<div class="wrap">
+  <header class="section-header">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">Perguntas<br/>frequentes</h2>
+    <p class="section-sub">Tudo o que você precisa saber antes de começarmos a trabalhar juntas.</p>
+  </header>
+
+  <!-- ✏️ Edite as perguntas aqui -->
+  <div class="faq-wrap">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Como funciona o processo de trabalho?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <p class="faq-a">Começamos com uma conversa para entender seus objetivos e o que você já tem. A partir daí, defino a estratégia, fazemos alinhamento de cronograma e eu cuido da execução completa — da pauta ao upload.</p>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Você trabalha com contratos mensais ou por projeto?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <p class="faq-a">Trabalho das duas formas. Para gestão de redes sociais, prefiro contratos mensais com no mínimo 3 meses para garantir consistência. Para edição de vídeos avulsos ou estratégia, trabalho por projeto.</p>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Qual é o prazo médio de entrega de um vídeo editado?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <p class="faq-a">Vídeos curtos (até 60s): 3 a 5 dias úteis. Vídeos longos para YouTube: 5 a 10 dias úteis. O prazo pode variar conforme a complexidade e os retornos do cliente.</p>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Você trabalha com clientes fora do Rio de Janeiro?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <p class="faq-a">Sim! Atendo clientes remotamente em todo o Brasil. Todo o processo acontece de forma assíncrona — recebo os materiais, edito e entrego com feedback por mensagem ou reunião online.</p>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Como entro em contato para começar um projeto?
+        <span class="faq-arrow">▼</span>
+      </button>
+      <p class="faq-a">Pelo formulário abaixo ou direto pelo Instagram @rayllafotos. Respondo em até 48 horas em dias úteis.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ============================================================
+  CONTATO
+============================================================ -->
+<section id="contato">
+<div class="wrap">
+  <header class="section-header">
+    <p class="section-label">Contato</p>
+    <h2 class="section-title">Vamos<br/>conversar</h2>
+    <p class="section-sub">Pronta para um novo projeto? Me conta o que você precisa.</p>
+  </header>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Me encontre por aqui</h3>
+      <p>Respondo em até 48 horas em dias úteis. Para projetos urgentes, prefira o Instagram.</p>
+      <div class="contact-links">
+        <!-- ✏️ Troque seu email e Instagram -->
+        <a href="mailto:contato@rayllaestudio.com" class="contact-link">
+          <span class="contact-icon">✉</span>contato@rayllaestudio.com
+        </a>
+        <a href="https://instagram.com/rayllafotos" target="_blank" class="contact-link">
+          <span class="contact-icon">◎</span>@rayllafotos
+        </a>
+        <span class="contact-link">
+          <span class="contact-icon">📍</span>Rio de Janeiro, RJ
+        </span>
+      </div>
+    </div>
+
+    <!-- Formulário via Formspree -->
+    <!-- ✏️ Troque ACTION_URL pelo seu link do Formspree (veja guia) -->
+    <div id="form-wrap">
+      <form class="form" id="contact-form">
+        <div class="form-group">
+          <label class="form-label" for="f-name">Nome</label>
+          <input id="f-name" name="name" type="text" class="form-input" required placeholder="Seu nome"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-email">Email</label>
+          <input id="f-email" name="email" type="email" class="form-input" required placeholder="seu@email.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-msg">Mensagem</label>
+          <textarea id="f-msg" name="message" class="form-textarea" required placeholder="Me conta o que você precisa..."></textarea>
+        </div>
+        <button type="submit" class="form-btn" id="form-btn">Enviar mensagem</button>
+        <p class="form-warn" id="form-warn"></p>
+      </form>
+    </div>
+  </div>
+
+</div>
+</section>
+
+
+<!-- ============================================================
+  FOOTER
+============================================================ -->
+<footer>
+  <div class="footer">
+    <span class="footer-brand">Raylla Studio</span>
+    <span class="footer-copy" id="footer-year"></span>
+  </div>
+</footer>
+
+
+<!-- Modal -->
+<div class="modal-bg" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-media" id="modal-media"></div>
+    <div class="modal-body">
+      <div class="modal-meta">
+        <span class="modal-client" id="modal-client"></span>
+        <span class="modal-date"   id="modal-date"></span>
+      </div>
+      <h2 class="modal-title" id="modal-title"></h2>
+      <div class="tags modal-tags" id="modal-tags"></div>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ================================================================
+//  ⭐ SEUS POSTS — edite aqui para adicionar novos conteúdos ⭐
+//
+//  type: 'video'   → vídeo do YouTube
+//  type: 'article' → artigo com foto
+//
+//  Para VÍDEOS: preencha youtubeId com o código após "v=" no link
+//  Ex: https://youtube.com/watch?v=ABC123  → youtubeId: 'ABC123'
+//
+//  Para ARTIGOS: escreva o texto completo no campo content
+//  Use \n\n para separar parágrafos
+// ================================================================
+
+const POSTS = [
+  {
+    id: 1,
+    type: 'video',
+    title: 'Como criar Reels que vendem em 15 segundos',
+    description: 'Estratégia de storytelling comprimido para converter em tempo real.',
+    tags: ['reels', 'ecommerce', 'estratégia'],
+    image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'dQw4w9WgXcQ', // ← substitua pelo ID real do seu vídeo
+    client: 'FILOSOFÉ',
+    date: '2025-04-10',
+  },
+  {
+    id: 2,
+    type: 'video',
+    title: 'Por que sua marca precisa de vídeos no TikTok agora',
+    description: 'Análise sobre o comportamento do consumidor jovem e a urgência do vídeo curto.',
+    tags: ['tiktok', 'marca', 'tendência'],
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'dQw4w9WgXcQ',
+    client: 'Chalé Paz',
+    date: '2025-03-22',
+  },
+  {
+    id: 3,
+    type: 'video',
+    title: 'Bastidores: produção completa para canal de espiritualidade',
+    description: 'Da pauta ao upload — como gerenciei a produção mensal do FILOSOFÉ.',
+    tags: ['produção', 'youtube', 'espiritualidade'],
+    image: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=800&q=80',
+    youtubeId: 'dQw4w9WgXcQ',
+    client: 'FILOSOFÉ',
+    date: '2025-03-05',
+  },
+  {
+    id: 4,
+    type: 'article',
+    title: 'O que aprendi produzindo 30 episódios de filosofia no YouTube',
+    description: 'Bastidores de processo criativo, desafios de pauta e o que faz um canal crescer.',
+    tags: ['youtube', 'processo', 'filosofia'],
+    image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=800&q=80',
+    client: 'Editorial',
+    date: '2025-04-01',
+    content: `Trabalhar com um canal de filosofia foi um dos projetos mais exigentes — e mais ricos — da minha trajetória até aqui.
+
+Não se trata apenas de editar vídeos. Cada episódio do FILOSOFÉ começa semanas antes com pesquisa de pauta, alinhamento com a host, e uma curadoria cuidadosa de convidados.
+
+Timing importa mais do que produção. Um corte preciso na fala certa vale mais do que qualquer efeito visual. Filosofia pede silêncio. Pede respiração.
+
+A thumbnail é a primeira frase do vídeo. Se ela não comunica a promessa do conteúdo em menos de um segundo, você perdeu o clique.
+
+O maior desafio foi padronizar sem mecanizar. A resposta que encontrei: padronize a estrutura, não o conteúdo. O conteúdo precisa respirar.`,
+  },
+  {
+    id: 5,
+    type: 'article',
+    title: 'Por que turismo consciente precisa de narrativa visual forte',
+    description: 'Como o audiovisual transforma a percepção de um destino e converte visitantes em embaixadores.',
+    tags: ['turismo', 'narrativa', 'visual'],
+    image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80',
+    client: 'Editorial',
+    date: '2025-01-18',
+    content: `Tem uma diferença enorme entre mostrar um lugar e fazer alguém sentir que precisa estar lá.
+
+Quando trabalhei com o Chalé Paz, um retiro de turismo consciente, meu desafio não era filmar beleza — a natureza já faz isso sozinha. Era capturar a experiência interna que o lugar provoca.
+
+Em um mundo saturado de estímulos, comunicar desaceleração é paradoxal. A tentação é criar um vídeo acelerado, com trilha épica e cortes rápidos. Mas o oposto é o que funciona: planos longos, sons ambiente, tempo para o espectador respirar junto com a imagem.
+
+A câmera não filma o espaço — filma a pessoa dentro do espaço. Quando o foco é a transformação do hóspede, o conteúdo deixa de ser publicidade e vira documento. E documento converte mais.`,
+  },
+  // ──────────────────────────────────────────────────────
+  // ✏️ ADICIONE NOVOS POSTS AQUI (copie um bloco acima)
+  // ──────────────────────────────────────────────────────
+];
+
+
+// ================================================================
+//  LÓGICA DO FEED — não precisa editar abaixo
+// ================================================================
+
+let currentFilter = 'all';
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
+}
+
+function renderFeed() {
+  const grid = document.getElementById('feed-grid');
+  const sorted = [...POSTS].sort((a,b) => new Date(b.date) - new Date(a.date));
+  const filtered = currentFilter === 'all' ? sorted : sorted.filter(p => p.type === currentFilter);
+
+  if (!filtered.length) {
+    grid.innerHTML = '<p class="empty">Nenhum post nessa categoria ainda.</p>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((p, i) => `
+    <article class="card" onclick="openModal(${p.id})" style="animation-delay:${i*55}ms" tabindex="0">
+      <div class="card-img">
+        <img src="${p.image}" alt="${p.title}" loading="lazy"
+          onerror="this.src='https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=800&q=60'"/>
+        <span class="card-badge">${p.type === 'video' ? '▶ Vídeo' : '✦ Artigo'}</span>
+        ${p.type === 'video' ? '<div class="play-overlay"><div class="play-btn">▶</div></div>' : ''}
+      </div>
+      <div class="card-body">
+        <p class="card-client">${p.client}</p>
+        <h2 class="card-title">${p.title}</h2>
+        <p class="card-desc">${p.description}</p>
+        <div class="tags">${p.tags.map(t => `<span class="tag">#${t}</span>`).join('')}</div>
+        <time class="card-date">${formatDate(p.date)}</time>
+      </div>
+    </article>
+  `).join('');
+}
+
+// Filtros
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderFeed();
+  });
+});
+
+// Modal
+function openModal(id) {
+  const p = POSTS.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('modal-client').textContent = p.client;
+  document.getElementById('modal-date').textContent   = formatDate(p.date);
+  document.getElementById('modal-title').textContent  = p.title;
+  document.getElementById('modal-tags').innerHTML = p.tags.map(t => `<span class="tag">#${t}</span>`).join('');
+  document.getElementById('modal-content').textContent = p.type === 'article' && p.content ? p.content : p.description;
+
+  const media = document.getElementById('modal-media');
+  if (p.type === 'video' && p.youtubeId) {
+    media.innerHTML = `
+      <iframe src="https://www.youtube.com/embed/${p.youtubeId}?autoplay=1&rel=0"
+        title="${p.title}" allow="accelerometer;autoplay;clipboard-write;encrypted-media;picture-in-picture" allowfullscreen></iframe>
+      <button class="modal-x" onclick="closeModalBtn()">✕</button>`;
+  } else {
+    media.innerHTML = `
+      <img src="${p.image}" alt="${p.title}"/>
+      <button class="modal-x" onclick="closeModalBtn()">✕</button>`;
+  }
+
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) closeModalBtn();
+}
+
+function closeModalBtn() {
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('modal-media').innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalBtn(); });
+
+// FAQ
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// Dark mode
+function toggleTheme() {
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('rs-theme', next);
+}
+
+(function() {
+  const saved = localStorage.getItem('rs-theme');
+  const pref  = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', saved || pref);
+})();
+
+// Mobile menu
+function openMenu()  { document.getElementById('mob-menu').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeMenu() { document.getElementById('mob-menu').classList.remove('open'); document.body.style.overflow=''; }
+
+// Formulário via Formspree
+// ✏️ TROQUE O LINK ABAIXO pelo seu link do Formspree
+// Como pegar: formspree.io → crie conta → New Form → copie o link "action"
+const FORMSPREE_URL = 'https://formspree.io/f/SEU_ID_AQUI';
+
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn  = document.getElementById('form-btn');
+  const warn = document.getElementById('form-warn');
+
+  if (FORMSPREE_URL.includes('SEU_ID_AQUI')) {
+    warn.textContent = '⚠ Configure o Formspree: troque SEU_ID_AQUI pelo seu ID (linha ~340 do arquivo).';
+    return;
+  }
+
+  btn.textContent = 'Enviando...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      body: new FormData(this),
+      headers: { Accept: 'application/json' }
+    });
+    if (res.ok) {
+      document.getElementById('form-wrap').innerHTML = '<div class="form-success">Mensagem enviada! ✦<br/><span style="font-family:var(--body);font-size:.85rem;color:var(--muted);margin-top:8px;display:block">Retorno em breve.</span></div>';
+    } else {
+      warn.textContent = 'Algo deu errado. Tente pelo Instagram.';
+      btn.textContent = 'Enviar mensagem';
+      btn.disabled = false;
+    }
+  } catch {
+    warn.textContent = 'Algo deu errado. Tente pelo Instagram.';
+    btn.textContent = 'Enviar mensagem';
+    btn.disabled = false;
+  }
+});
+
+// Footer
+document.getElementById('footer-year').textContent = `© ${new Date().getFullYear()} · Rio de Janeiro, RJ`;
+
+// Init
+renderFeed();
+</script>
+</body>
+</html>
